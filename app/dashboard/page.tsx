@@ -45,7 +45,7 @@ export default function DashboardPage() {
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#fff3e5' }}>
       {/* Top Gradient Header with Icons */}
       <div 
-        className="w-full h-12 flex items-center justify-around px-4"
+        className="w-full h-12 flex items-center justify-around "
         style={{
           background: 'linear-gradient(to right, #2F6657 0%, #4A9B8E 25%, #6BB89E 50%, #8BC9AE 75%, #A5D4BE 100%)'
         }}
@@ -136,23 +136,22 @@ export default function DashboardPage() {
       </div>
 
       {/* Weight Info */}
-      <div className="w-full px-4 py-3 bg-white border-b border-gray-200">
-        <div className="flex items-center justify-between">
-          <div className="flex flex-col">
-            <span className="text-base font-bold text-gray-900">{weightToLose}KG</span>
+  <div className="w-full px-4 py-3 bg-white border-b border-gray-200">
+        <div className="flex items-center justify-center gap-8">
+          <div className="flex flex-col items-center">
+            <span className="text-base font-bold text-gray-900">9kg</span>
             <span className="text-xs text-gray-600">TO LOSE</span>
           </div>
           <div className="flex flex-col items-center">
-            <span className="text-base font-bold text-gray-900">{targetWeight}KG</span>
+            <span className="text-base font-bold text-gray-900">80kg</span>
             <span className="text-xs text-gray-600">GOAL</span>
           </div>
-          <div className="flex flex-col items-end">
-            <span className="text-base font-bold text-gray-900">{currentWeight}KG</span>
+          <div className="flex flex-col items-center">
+            <span className="text-base font-bold text-gray-900">89kg</span>
             <span className="text-xs text-gray-600">WEIGHT</span>
           </div>
         </div>
       </div>
-
       {/* Main Content - Daily Plan Cards */}
       <main className="flex-1 px-4 py-6 pb-20">
         <div className="max-w-2xl mx-auto space-y-4">
