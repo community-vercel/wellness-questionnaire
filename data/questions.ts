@@ -29,32 +29,32 @@ export const questions: Question[] = [
         label: '18-26', 
         value: '18-26', 
         icon: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=300&h=400&fit=crop',
-        iconFemale: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=400&fit=crop&crop=faces',
-        iconMale: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=300&h=400&fit=crop&crop=faces',
+        iconFemale: 'https://v3.ketogo.app/ww-en/k-33m-usd-metric-default/img/HYZrYnnAsK-734.webp',
+        iconMale: 'https://v3.ketogo.app/ww-en/k-33m-usd-metric-default/img/KADQVlZKpN-734.webp',
         bgColor: '#E8DDD0'
       },
       { 
         label: '27-38', 
         value: '27-38', 
         icon: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=400&fit=crop',
-        iconFemale: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=400&fit=crop&crop=faces',
-        iconMale: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=400&fit=crop&crop=faces',
+        iconFemale: 'https://v3.ketogo.app/ww-en/k-33m-usd-metric-default/img/ddw7N6zRFG-734.webp',
+        iconMale: 'https://v3.ketogo.app/ww-en/k-33m-usd-metric-default/img/uNSYjeFXBk-734.webp',
         bgColor: '#E0B4B4'
       },
       { 
         label: '39-50', 
         value: '39-50', 
         icon: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=400&fit=crop',
-        iconFemale: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=400&fit=crop&crop=faces',
-        iconMale: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=400&fit=crop&crop=faces',
+        iconFemale: 'https://v3.ketogo.app/ww-en/k-33m-usd-metric-default/img/0KuDDOg40H-734.webp',
+        iconMale: 'https://v3.ketogo.app/ww-en/k-33m-usd-metric-default/img/1tZaeIRJIA-734.webp',
         bgColor: '#E8DDD0'
       },
       { 
         label: '50+', 
         value: '50+', 
         icon: 'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=300&h=400&fit=crop',
-        iconFemale: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=300&h=400&fit=crop&crop=faces',
-        iconMale: 'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=300&h=400&fit=crop&crop=faces',
+        iconFemale: 'https://v3.ketogo.app/ww-en/k-33m-usd-metric-default/img/8z3zAJ82qo-480.webp',
+        iconMale: 'https://v3.ketogo.app/ww-en/k-33m-usd-metric-default/img/LEFWuLuLHG-480.webp',
         bgColor: '#F5F0E8'
       },
     ],
