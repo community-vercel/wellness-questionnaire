@@ -8,38 +8,35 @@ export default function ChatPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
-      {/* Top Gradient Header with Icons */}
-      <div 
-        className="w-full h-12 flex items-center justify-around px-4"
-        style={{
-          background: 'linear-gradient(to right, #2F6657 0%, #4A9B8E 25%, #6BB89E 50%, #8BC9AE 75%, #A5D4BE 100%)'
-        }}
+    <div 
+        className="w-full h-12 flex items-center justify-around bg-gradient-to-br from-teal-800 via-teal-600 to-yellow-200"
+        style={{ justifyContent: 'space-evenly' }}
       >
-        <Link href="/dashboard" className="flex items-center justify-center">
-          <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        <a href="/dashboard" className="flex items-center justify-center w-8 h-8">
+          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24" style={{ opacity: 1 }}>
+            <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
           </svg>
-        </Link>
-        <Link href="/dashboard/premium" className="flex items-center justify-center">
+        </a>
+        <a href="/dashboard/premium" className="flex items-center justify-center w-8 h-8">
           <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
           </svg>
-        </Link>
-        <Link href="/dashboard/chat" className="flex items-center justify-center">
+        </a>
+        <a href="/dashboard/chat" className="flex items-center justify-center w-8 h-8">
           <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
           </svg>
-        </Link>
-        <Link href="/dashboard/shopping" className="flex items-center justify-center">
+        </a>
+        <a href="/dashboard/shopping" className="flex items-center justify-center w-8 h-8">
           <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
           </svg>
-        </Link>
-        <Link href="/dashboard/profile" className="flex items-center justify-center">
+        </a>
+        <a href="/dashboard/profile" className="flex items-center justify-center w-8 h-8">
           <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
           </svg>
-        </Link>
+        </a>
       </div>
 
       {/* Chat Window */}

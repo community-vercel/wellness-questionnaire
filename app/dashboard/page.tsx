@@ -42,44 +42,48 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#fff3e5' }}>
-      {/* Top Gradient Header with Icons */}
-      <div 
-        className="w-full h-12 flex items-center justify-around "
-        style={{
-          background: 'linear-gradient(to right, #2F6657 0%, #4A9B8E 25%, #6BB89E 50%, #8BC9AE 75%, #A5D4BE 100%)'
-        }}
+<div
+  className="min-h-screen flex flex-col"
+  style={{
+    backgroundColor: '#fff3e5',
+  }}
+>
+  <div 
+        className="w-full h-12 flex items-center justify-around bg-gradient-to-br from-teal-800 via-teal-600 to-yellow-200"
+        style={{ justifyContent: 'space-evenly' }}
       >
-        <Link href="/dashboard" className="flex items-center justify-center w-8 h-8">
+        <a href="/dashboard" className="flex items-center justify-center w-8 h-8">
           <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24" style={{ opacity: 1 }}>
             <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
           </svg>
-        </Link>
-        <Link href="/dashboard/premium" className="flex items-center justify-center w-8 h-8">
+        </a>
+        <a href="/dashboard/premium" className="flex items-center justify-center w-8 h-8">
           <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
           </svg>
-        </Link>
-        <Link href="/dashboard/chat" className="flex items-center justify-center w-8 h-8">
+        </a>
+        <a href="/dashboard/chat" className="flex items-center justify-center w-8 h-8">
           <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
           </svg>
-        </Link>
-        <Link href="/dashboard/shopping" className="flex items-center justify-center w-8 h-8">
+        </a>
+        <a href="/dashboard/shopping" className="flex items-center justify-center w-8 h-8">
           <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
           </svg>
-        </Link>
-        <Link href="/dashboard/profile" className="flex items-center justify-center w-8 h-8">
+        </a>
+        <a href="/dashboard/profile" className="flex items-center justify-center w-8 h-8">
           <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
           </svg>
-        </Link>
+        </a>
       </div>
+
+    
 
       {/* Date Navigation */}
       <div className="w-full px-4 py-3 bg-white border-b border-gray-200">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-center gap-4 mb-8">
           <button 
             onClick={() => {
               const newDate = new Date(selectedDate);
@@ -136,7 +140,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Weight Info */}
-  <div className="w-full px-4 py-3 bg-white border-b border-gray-200">
+  <div className="w-full px-4 py-3 bg-white">
         <div className="flex items-center justify-center gap-8">
           <div className="flex flex-col items-center">
             <span className="text-base font-bold text-gray-900">9kg</span>
@@ -154,7 +158,7 @@ export default function DashboardPage() {
       </div>
       {/* Main Content - Daily Plan Cards */}
       <main className="flex-1 px-4 py-6 pb-20">
-        <div className="max-w-2xl mx-auto space-y-4">
+        <div className="max-w-lg mx-auto space-y-4">
           {/* Breakfast Card */}
           <div 
             className="bg-white rounded-lg overflow-hidden"
