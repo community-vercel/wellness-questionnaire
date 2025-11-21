@@ -25,11 +25,11 @@ export default function TestimonialPage() {
   const isFemale = gender === 'female';
   const userName = isFemale ? 'Linda B. (38)' : 'Victor K. (38)';
   const beforeImage = isFemale 
-    ? 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=600&fit=crop'
-    : 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop';
+    ? 'https://v3.ketogo.app/ww-en/k-33m-usd-metric-default/img/uZZKw4Nvg1-480.webp'
+    : 'https://v3.ketogo.app/ww-en/k-33m-usd-metric-default/img/HBarpJx5-l-480.webp';
   const afterImage = isFemale
-    ? 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=600&fit=crop'
-    : 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400&h=600&fit=crop';
+    ? 'https://v3.ketogo.app/ww-en/k-33m-usd-metric-default/img/DP9sOiyR05-480.webp'
+    : 'https://v3.ketogo.app/ww-en/k-33m-usd-metric-default/img/WzIiKimr7k-480.webp';
 
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#fff3e5' }}>

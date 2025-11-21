@@ -61,7 +61,7 @@ export default function PricingPage() {
     ? 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=400&fit=crop'
     : 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=300&h=400&fit=crop';
   const testimonialImage = isFemale
-    ? { before: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=400&fit=crop', after: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=400&fit=crop' }
+    ? { before: 'https://v3.ketogo.app/ww-en/k-33m-usd-metric-default/img/3FKtFGc4_Q-734.webp', after: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=400&fit=crop' }
     : { before: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=400&fit=crop', after: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=300&h=400&fit=crop' };
 
   return (

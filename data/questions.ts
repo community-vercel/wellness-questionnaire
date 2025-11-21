@@ -68,22 +68,22 @@ export const questions: Question[] = [
         label: 'Look and feel better', 
         value: 'look-feel', 
         icon: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop',
-        iconFemale: 'https://v3.ketogo.app/ww-en/k-33m-usd-metric-default/img/OQ1Px6a5aW-734.webp',
-        iconMale: 'https://v3.ketogo.app/ww-en/k-33m-usd-metric-default/img/vJM_MMkFXV-734.webp'
+        iconFemale: 'https://v3.ketogo.app/ww-en/k-33m-usd-metric-default/img/6OC_0G2kFA-375.webp',
+        iconMale: 'https://v3.ketogo.app/ww-en/k-33m-usd-metric-default/img/Dsu65y76nU-375.webp'
       },
       { 
         label: 'Improve my health', 
         value: 'health', 
         icon: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=150&h=150&fit=crop',
-        iconFemale: 'https://v3.ketogo.app/ww-en/k-33m-usd-metric-default/img/OQ1Px6a5aW-734.webp',
-        iconMale: 'https://v3.ketogo.app/ww-en/k-33m-usd-metric-default/img/vJM_MMkFXV-734.webp'
+        iconFemale: 'https://v3.ketogo.app/ww-en/k-33m-usd-metric-default/img/EXJAQCNtQz-375.webp',
+        iconMale: 'https://v3.ketogo.app/ww-en/k-33m-usd-metric-default/img/fPnH6JNT-m-375.webp'
       },
       { 
         label: 'Both', 
         value: 'both', 
         icon: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=150&h=150&fit=crop',
-        iconFemale: 'https://v3.ketogo.app/ww-en/k-33m-usd-metric-default/img/OQ1Px6a5aW-734.webp',
-        iconMale: 'https://v3.ketogo.app/ww-en/k-33m-usd-metric-default/img/vJM_MMkFXV-734.webp'
+        iconFemale: 'https://v3.ketogo.app/ww-en/k-33m-usd-metric-default/img/h8gUWAq7U--375.webp',
+        iconMale: 'https://v3.ketogo.app/ww-en/k-33m-usd-metric-default/img/AcrmT4p9LQ-375.webp'
       },
     ],
   },
