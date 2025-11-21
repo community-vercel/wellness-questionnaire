@@ -12,7 +12,7 @@ export default function Header({ showProfileIcon = false, isDark = false }) {
         <div className="flex items-center gap-1.5">
           <span className="text-xl">🥑</span>
           <span className="font-bold" style={{ color: '#12573d', fontSize: '18px' }}>
-            KetoGo<span className="font-normal" style={{ color: '#2F6657', fontSize: '16px' }}>.app</span>
+            KetoGo<span className="font-bold" style={{ color: '#2F6657', fontSize: '16px' }}>.app</span>
           </span>
         </div>
         {showProfileIcon && (
