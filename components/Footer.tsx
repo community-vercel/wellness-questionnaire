@@ -2,10 +2,10 @@ import React from 'react';
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-[#fff3e5] py-6 px-4 relative z-20" style={{ backgroundColor: '#fff3e5' }}>
-      <div className="max-w-5xl mx-auto">
-        {/* Disclaimer Section */}
-        <div className="mb-5 pb-5 border-b border-gray-300">
+    <footer className="w-full relative z-20">
+      {/* Disclaimer Section */}
+      <div className="w-full py-6" style={{ backgroundColor: '#fcf7f0' }}>
+        <div className="max-w-5xl mx-auto px-4">
           <h3 className="font-bold text-gray-900 mb-2" style={{ fontSize: '14px' }}>Disclaimer</h3>
           <p className="text-gray-900 mb-2 leading-relaxed" style={{ fontSize: '12px' }}>
             The outcomes you achieve may differ based on factors such as your initial condition, objectives, dedication, and the accuracy of the information presented in this form. Typical users of KetoGo.app can experience a weight loss of up to 3 kg in the initial week.
@@ -14,9 +14,11 @@ export default function Footer() {
             The content provided on this website should not be considered medical advice. It is your responsibility to prioritize your health and safety at all times. For any inquiries, please consult a medical professional.
           </p>
         </div>
+      </div>
 
-        {/* Brand and Services Section */}
-        <div className="mb-3">
+      {/* Brand and Services Section */}
+      <div className="w-full py-6" style={{ backgroundColor: '#e8ddd0' }}>
+        <div className="max-w-5xl mx-auto px-4">
           <div className="flex items-center gap-1.5 mb-3">
             <span className="text-xl">🥑</span>
             <span className="font-bold" style={{ color: '#12573d', fontSize: '18px' }}>
@@ -37,9 +39,9 @@ export default function Footer() {
                   </svg>
                 </div>
                 <div>
-                  <h4 className="font-bold text-gray-900 mb-0.5" style={{ fontSize: '14px' }}>chat with us</h4>
+                  <h4 className="font-bold text-gray-900 mb-0.5" style={{ fontSize: '14px' }}>Chat with us</h4>
                   <p className="text-gray-900 leading-relaxed" style={{ fontSize: '12px' }}>
-                    Our certified Nutritionist team is available through your account chat section. We are here for you 24/7.
+                    Our certified Nutritionist team is available through your account chat section. We are here for you 24/7
                   </p>
                 </div>
               </div>
@@ -62,34 +64,33 @@ export default function Footer() {
           </div>
 
           {/* Links */}
-          <div className="flex flex-wrap gap-x-3 gap-y-1 mb-4" style={{ fontSize: '12px' }}>
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-4" style={{ fontSize: '12px' }}>
             <a href="#" className="underline transition-colors" style={{ fontSize: '12px', color: '#2563EB' }}>
               Edit cookie preferences
             </a>
-            <a href="#" className="underline transition-colors flex items-center gap-0.5" style={{ fontSize: '12px', color: '#2563EB' }}>
-              Terms of Privacy policy <span className="text-gray-400">›</span>
+            <span style={{ color: '#2563EB' }}> &gt; </span>
+            <a href="#" className="underline transition-colors" style={{ fontSize: '12px', color: '#2563EB' }}>
+              Terms of Privacy policy
             </a>
-            <a href="#" className="underline transition-colors flex items-center gap-0.5" style={{ fontSize: '12px', color: '#2563EB' }}>
-              Terms of subscription services <span className="text-gray-400">›</span>
+            <span style={{ color: '#2563EB' }}> &gt; </span>
+            <a href="#" className="underline transition-colors" style={{ fontSize: '12px', color: '#2563EB' }}>
+              Terms of subscription services
             </a>
           </div>
 
           {/* Facebook Disclaimer */}
           <p className="text-gray-900 mb-3" style={{ fontSize: '11px', lineHeight: '1.4' }}>
-            The results differ from person to person. This site is not a part of the Facebook website of Facebook Inc. Additionally this site is NOT endorsed by Facebook in any way. Facebook is a trademark of Facebook, Inc
+            The results differ from person to person. This site is not a part of the Facebook website of Facebook Inc. Additionally this site is NOT endorsed by Facebook in any way. Facebook is a trademark of Facebook, Inc.
           </p>
         </div>
       </div>
 
       {/* Copyright - Full Width, Stuck to Bottom */}
-      <div className="bg-[#12573d] w-full mt-4" style={{ 
+      <div className="bg-[#12573d] w-full" style={{ 
         height: '48px', 
         display: 'flex', 
         alignItems: 'center', 
         justifyContent: 'center', 
-        marginBottom: 0,
-        marginLeft: 0,
-        marginRight: 0,
         paddingLeft: '16px',
         paddingRight: '16px'
       }}>

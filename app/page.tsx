@@ -55,7 +55,7 @@ const router=useRouter()
           <div className="max-w-7xl mx-auto px-6 py-4">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <p className="text-sm text-gray-800 leading-relaxed flex-1">
-                We value your privacy. We use cookies to process your data, personalise your site experience, serve personalised ads and analyse site traffic. Because we value your privacy, we ask your permission to use such technologies. <a href="#" className="underline text-gray-900 font-medium">Find more in our Cookie policy</a>.
+                We value your privacy We use cookies to process your data, personalise your site experience, serve personalised ads and analyse site traffic. Because we value your privacy, we ask your permission to use such technologies. <a href="#" className="underline text-gray-900 font-medium">Find more in our Cookie policy</a> . 
               </p>
               <div className="flex gap-3 flex-shrink-0">
                 <button
@@ -126,7 +126,7 @@ const router=useRouter()
             </button>
           </div>
 
-          <p className="text-white text-sm sm:text-base font-normal opacity-90 px-4">
+          <p className="text-white text-sm sm:text-base font-normal opacity-90 px-4 mb-4">
             The service is provided by certified nutritionists and fitness trainers
           </p>
         </div>

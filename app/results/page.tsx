@@ -6,116 +6,99 @@ import Footer from '@/components/Footer';
 
 export default function ResultsPage() {
   const router = useRouter();
-  const [progress, setProgress] = useState(0);
+  const [answers, setAnswers] = useState<Record<number, any>>({});
 
   useEffect(() => {
-    // Simulate progress
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setTimeout(() => {
-            router.push('/email');
-          }, 1000);
-          return 100;
-        }
-        return prev + 1;
-      });
-    }, 30);
+    // Load saved answers from localStorage
+    const savedAnswers = localStorage.getItem('answers');
+    if (savedAnswers) {
+      setAnswers(JSON.parse(savedAnswers));
+    }
+  }, []);
 
-    return () => clearInterval(interval);
-  }, [router]);
+  // Calculate what percentage goal weight is of current weight
+  const calculatePercentage = () => {
+    const currentWeightAnswer = answers[10]; // Question 10 is current weight
+    const goalWeightAnswer = answers[11]; // Question 11 is goal weight
+    
+    if (!currentWeightAnswer || !goalWeightAnswer) return 97; // Default
+    
+    const currentWeight = parseFloat(currentWeightAnswer.value);
+    const goalWeight = parseFloat(goalWeightAnswer.value);
+    
+    const currentWeightKg = currentWeightAnswer.unit === 'lb' ? currentWeight * 0.453592 : currentWeight;
+    const goalWeightKg = goalWeightAnswer.unit === 'lb' ? goalWeight * 0.453592 : goalWeight;
+    
+    // Calculate what percentage the goal weight is of current weight
+    const percentage = (goalWeightKg / currentWeightKg) * 100;
+    
+    return Math.round(percentage);
+  };
 
-  const circumference = 2 * Math.PI * 90; // radius = 90
-  const offset = circumference - (progress / 100) * circumference;
+  const percentage = calculatePercentage();
+
+  const handleContinue = () => {
+    // Continue to question 13 (name input)
+    router.push('/questionnaire/13');
+  };
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#12573d' }}>
+    <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#2F6657' }}>
       <main className="flex-1 flex items-center justify-center px-4 py-12">
         <div className="max-w-2xl w-full text-center">
-          <h1 className="text-2xl md:text-3xl font-extrabold text-white mb-12">
-            Preparing your plan. Please wait to see your results!
-          </h1>
-          
-          {/* Circular Progress Indicator */}
-          <div className="relative w-64 h-64 mx-auto mb-12">
-            <svg className="transform -rotate-90 w-full h-full" viewBox="0 0 200 200">
-              {/* Background circle */}
-              <circle
-                cx="100"
-                cy="100"
-                r="90"
-                fill="none"
-                stroke="#E8DDD0"
-                strokeWidth="12"
-              />
-              {/* Progress circle */}
-              <circle
-                cx="100"
-                cy="100"
-                r="90"
-                fill="none"
-                stroke="#F0A868"
-                strokeWidth="12"
-                strokeDasharray={circumference}
-                strokeDashoffset={offset}
-                strokeLinecap="round"
-                style={{ transition: 'stroke-dashoffset 0.3s ease' }}
-              />
-            </svg>
-            {/* Percentage text */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-4xl font-extrabold" style={{ color: '#2F6657' }}>
-                {progress}%
-              </span>
+          {/* Target Icon */}
+          <div className="mb-10 flex justify-center">
+            <div className="relative w-48 h-48">
+              <svg className="w-full h-full" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                {/* Outer light green/teal ring */}
+                <circle cx="100" cy="100" r="88" fill="none" stroke="#A0E0D0" strokeWidth="14"/>
+                {/* White ring */}
+                <circle cx="100" cy="100" r="68" fill="none" stroke="white" strokeWidth="12"/>
+                {/* Inner light green/teal bullseye */}
+                <circle cx="100" cy="100" r="48" fill="#A0E0D0"/>
+                {/* Arrow from top-right striking bullseye - light green/teal */}
+                <g transform="translate(100, 100)">
+                  {/* Arrow coming from top-right, striking center */}
+                  <path
+                    d="M 140 20 L 100 100 L 90 90 L 130 30 Z"
+                    fill="#A0E0D0"
+                  />
+                  {/* Arrow head at center */}
+                  <path
+                    d="M 100 100 L 85 85 L 90 90 Z"
+                    fill="#A0E0D0"
+                  />
+                  <path
+                    d="M 100 100 L 90 90 L 85 95 Z"
+                    fill="#A0E0D0"
+                  />
+                </g>
+              </svg>
             </div>
           </div>
 
-          {/* Information Card */}
-          <div className="bg-white rounded-lg p-6 shadow-lg max-w-md mx-auto">
-            <h2 className="text-lg font-bold text-gray-900 mb-4">
-              You're in top 20% of candidates most fit for rapid weight loss
-            </h2>
-            
-            <div className="space-y-3 text-left">
-              <div className="flex items-start gap-3">
-                <div className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5" style={{ backgroundColor: '#F0A868' }}>
-                  <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <p className="text-sm text-gray-900 leading-relaxed">
-                  Based on your answers, you'll be able to lose 5kg within your first week with our weight loss plan
-                </p>
-              </div>
-              
-              <div className="flex items-start gap-3">
-                <div className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5" style={{ backgroundColor: '#F0A868' }}>
-                  <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <p className="text-sm text-gray-900 leading-relaxed">
-                  89% of users with very similar profile as yours have reached their weight goals within the projected timelines
-                </p>
-              </div>
-              
-              <div className="flex items-start gap-3">
-                <div className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5" style={{ backgroundColor: '#F0A868' }}>
-                  <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <p className="text-sm text-gray-900 leading-relaxed">
-                  Your weight and health profile is great for Keto diet
-                </p>
-              </div>
-            </div>
+          {/* Main Heading */}
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-6 leading-tight" style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 700 }}>
+            That's {percentage} % of your current weight!
+          </h1>
+
+          {/* Description */}
+          <p className="text-base md:text-lg text-white mb-10 max-w-xl mx-auto leading-relaxed" style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)', opacity: 0.9, lineHeight: '1.6' }}>
+            You've just set a realistic and reachable goal. This is an important step and we'll help you to reach your goal 100% of the way!
+          </p>
+
+          {/* Continue Button */}
+          <div className="flex justify-center mt-6">
+            <button
+              onClick={handleContinue}
+              className="px-10 py-4 font-bold rounded-2xl transition-all duration-300 border-2 border-white hover:opacity-90"
+              style={{ backgroundColor: '#2F6657', color: '#FFFFFF', fontSize: '1.125rem', fontWeight: 700, minWidth: '220px' }}
+            >
+              Continue
+            </button>
           </div>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }

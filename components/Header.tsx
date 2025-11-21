@@ -7,19 +7,21 @@ interface HeaderProps {
 
 export default function Header({ showProfileIcon = false, isDark = false }) {
   return (
-    <header className="w-full px-4 sm:px-6 py-2 relative z-20" style={{ backgroundColor: '#b5c2b0' }}>
-      <div className="max-w-7xl mx-auto px-2 sm:px-6 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center text-white font-bold text-lg">
-            🥑
-          </div>
-          <span className="text-xl font-bold text-gray-900">KetoGO.app</span>
+    <header className="w-full px-4 sm:px-6 py-3 relative z-20" style={{ backgroundColor: 'rgba(255,243,229,0.7)' }}>
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
+        <div className="flex items-center gap-1.5">
+          <span className="text-xl">🥑</span>
+          <span className="font-bold" style={{ color: '#12573d', fontSize: '18px' }}>
+            KetoGo<span className="font-normal" style={{ color: '#2F6657', fontSize: '16px' }}>.app</span>
+          </span>
         </div>
-        <button className="w-9 h-9 rounded-full bg-teal-700 flex items-center justify-center text-white hover:bg-teal-800 transition-colors">
-          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
-          </svg>
-        </button>
+        {showProfileIcon && (
+          <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: '#12573d' }}>
+            <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+            </svg>
+          </div>
+        )}
       </div>
     </header>
   );
