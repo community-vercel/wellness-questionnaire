@@ -10,8 +10,23 @@ interface QuestionCardProps {
 }
 
 export default function QuestionCard({ question, onAnswer, initialAnswer }: QuestionCardProps) {
-  const [answer, setAnswer] = useState<any>(initialAnswer || '');
-  const [selectedMultiple, setSelectedMultiple] = useState<string[]>(initialAnswer || []);
+  // Handle initial answer - if it's an object with value property, use the value
+  const getInitialAnswer = () => {
+    if (!initialAnswer) return '';
+    if (typeof initialAnswer === 'object' && 'value' in initialAnswer) {
+      return initialAnswer.value;
+    }
+    return initialAnswer;
+  };
+
+  const getInitialMultiple = () => {
+    if (!initialAnswer) return [];
+    if (Array.isArray(initialAnswer)) return initialAnswer;
+    return [];
+  };
+
+  const [answer, setAnswer] = useState<any>(getInitialAnswer());
+  const [selectedMultiple, setSelectedMultiple] = useState<string[]>(getInitialMultiple());
   const [unit, setUnit] = useState<string>(() => {
     if (question.unit === 'kg' || question.unit === 'lb') {
       return question.unit;

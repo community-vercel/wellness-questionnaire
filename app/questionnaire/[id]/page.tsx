@@ -48,13 +48,15 @@ export default function QuestionnairePage() {
       router.push('/questionnaire/testimonial');
       return;
     }
-    if (currentQuestion.type === 'progress' && questionId === 14) {
-      router.push('/questionnaire/progress');
-      return;
-    }
-    if (currentQuestion.type === 'progress' && questionId === 34) {
-      router.push('/questionnaire/progress-final');
-      return;
+    if (currentQuestion.type === 'progress') {
+      if (questionId === 14 || questionId === 17) {
+        router.push('/questionnaire/progress');
+        return;
+      }
+      if (questionId === 34) {
+        router.push('/questionnaire/progress-final');
+        return;
+      }
     }
     if (currentQuestion.type === 'loading') {
       router.push('/questionnaire/loading');
