@@ -5,13 +5,16 @@ import { useRouter, useParams } from 'next/navigation';
 import Footer from '@/components/Footer';
 import ProgressBar from '@/components/ProgressBar';
 import QuestionCard from '@/components/QuestionCard';
-import { questions } from '@/data/questions';
+import { fetchQuestions } from '@/lib/questions';
+import { Question } from '@/data/questions';
 
 export default function QuestionnairePage() {
   const router = useRouter();
   const params = useParams();
   const questionId = parseInt(params.id as string);
   const [answers, setAnswers] = useState<Record<number, any>>({});
+  const [questions, setQuestions] = useState<Question[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Load saved answers from localStorage
@@ -21,32 +24,59 @@ export default function QuestionnairePage() {
     }
   }, []);
 
+  useEffect(() => {
+    const loadQuestions = async () => {
+      try {
+        const fetchedQuestions = await fetchQuestions();
+        setQuestions(fetchedQuestions);
+      } catch (error) {
+        console.error('Error fetching questions:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadQuestions();
+  }, []);
+
   const currentQuestion = questions.find(q => q.id === questionId);
+
+  // Redirect immediately for special question types (only after questions are loaded)
+  useEffect(() => {
+    if (loading || !currentQuestion) return;
+
+    if (currentQuestion.type === 'testimonial') {
+      router.push('/questionnaire/testimonial');
+      return;
+    }
+    if (currentQuestion.type === 'progress' && questionId === 14) {
+      router.push('/questionnaire/progress');
+      return;
+    }
+    if (currentQuestion.type === 'progress' && questionId === 34) {
+      router.push('/questionnaire/progress-final');
+      return;
+    }
+    if (currentQuestion.type === 'loading') {
+      router.push('/questionnaire/loading');
+      return;
+    }
+  }, [loading, currentQuestion, questionId, router]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#fff3e5' }}>
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading questions...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!currentQuestion) {
     router.push('/');
     return null;
   }
-
-  // Redirect immediately for special question types
-  useEffect(() => {
-    if (currentQuestion?.type === 'testimonial') {
-      router.push('/questionnaire/testimonial');
-      return;
-    }
-    if (currentQuestion?.type === 'progress' && questionId === 14) {
-      router.push('/questionnaire/progress');
-      return;
-    }
-    if (currentQuestion?.type === 'progress' && questionId === 34) {
-      router.push('/questionnaire/progress-final');
-      return;
-    }
-    if (currentQuestion?.type === 'loading') {
-      router.push('/questionnaire/loading');
-      return;
-    }
-  }, [currentQuestion, questionId, router]);
 
   // Don't render if it's a special type (will redirect)
   if (currentQuestion?.type === 'testimonial' || currentQuestion?.type === 'progress' || currentQuestion?.type === 'loading') {
@@ -99,7 +129,7 @@ export default function QuestionnairePage() {
     if (questionId < questions.length) {
       router.push(`/questionnaire/${questionId + 1}`);
     } else {
-      // After all 36 questions, go to email page
+      // After all questions, go to email page
       router.push('/email');
     }
   };

@@ -5,7 +5,8 @@ import { useState, useEffect } from 'react';
 import Footer from '@/components/Footer';
 import ProgressBar from '@/components/ProgressBar';
 import QuestionCard from '@/components/QuestionCard';
-import { questions } from '@/data/questions';
+import { fetchQuestions } from '@/lib/questions';
+import { Question } from '@/data/questions';
 
 const introSlides = [
   {
@@ -103,6 +104,8 @@ export default function IntroPage() {
   const slideId = parseInt(params.id as string);
   const [currentSlide] = useState(slideId);
   const [answers, setAnswers] = useState<Record<number, any>>({});
+  const [questions, setQuestions] = useState<Question[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Load saved answers from localStorage
@@ -112,10 +115,35 @@ export default function IntroPage() {
     }
   }, []);
 
+  useEffect(() => {
+    const loadQuestions = async () => {
+      try {
+        const fetchedQuestions = await fetchQuestions();
+        setQuestions(fetchedQuestions);
+      } catch (error) {
+        console.error('Error fetching questions:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadQuestions();
+  }, []);
+
   // If slideId is 1, show age selection question
   if (slideId === 1) {
+    if (loading) {
+      return (
+        <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#fff3e5' }}>
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto mb-4"></div>
+            <p className="text-gray-600">Loading questions...</p>
+          </div>
+        </div>
+      );
+    }
+
     const ageQuestion = questions.find(q => q.id === 1);
-    
+
     if (!ageQuestion) {
       router.push('/');
       return null;
