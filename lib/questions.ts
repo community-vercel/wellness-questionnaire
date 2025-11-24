@@ -1,12 +1,7 @@
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from './firebase';
-import { Question } from '@/data/questions';
+import { Question, questions } from '@/data/questions';
 
 export async function fetchQuestions(): Promise<Question[]> {
-  const querySnapshot = await getDocs(collection(db, 'questions'));
-  const questions: Question[] = [];
-  querySnapshot.forEach((doc) => {
-    questions.push(doc.data() as Question);
-  });
-  return questions;
+  // Return local questions data instead of fetching from Firestore
+  // Sort questions by ID to ensure proper order
+  return [...questions].sort((a, b) => a.id - b.id);
 }

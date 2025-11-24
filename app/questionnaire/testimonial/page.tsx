@@ -15,11 +15,11 @@ export default function TestimonialPage() {
   }, []);
 
   const handleContinue = () => {
-    router.push('/questionnaire/20');
+    router.push('/questionnaire/23');
   };
 
-  const totalSteps = 36;
-  const currentStep = 19;
+  const totalSteps = 38;
+  const currentStep = 22;
 
   // Gender-specific content
   const isFemale = gender === 'female';
@@ -51,7 +51,7 @@ export default function TestimonialPage() {
           <div className="max-w-3xl mx-auto">
             <div className="flex items-center justify-between mb-3">
               <button
-                onClick={() => router.push('/questionnaire/18')}
+                onClick={() => router.push('/questionnaire/21')}
                 className="flex items-center gap-2 transition-colors"
                 style={{ color: '#2F6657' }}
                 aria-label="Go back"

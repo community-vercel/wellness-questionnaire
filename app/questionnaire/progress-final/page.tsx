@@ -65,17 +65,17 @@ export default function ProgressFinalPage() {
   const formattedDateFull = targetDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); // "Mar 25, 2026"
 
   const handleContinue = () => {
-    // Save answer for question 34 (progress screen)
+    // Save answer for question 37 (progress screen)
     const savedAnswers = localStorage.getItem('answers');
     const answers = savedAnswers ? JSON.parse(savedAnswers) : {};
-    answers[34] = { value: 'continue', type: 'progress' };
+    answers[37] = { value: 'continue', type: 'progress' };
     localStorage.setItem('answers', JSON.stringify(answers));
-    
-    router.push('/questionnaire/35');
+
+    router.push('/questionnaire/38');
   };
 
   const totalSteps = 36;
-  const currentStep = 34;
+  const currentStep = 37;
 
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#fff3e5' }}>
@@ -100,7 +100,7 @@ export default function ProgressFinalPage() {
           <div className="mb-12 max-w-3xl mx-auto">
             <div className="flex items-center justify-between mb-6">
               <button
-                onClick={() => router.push('/questionnaire/33')}
+                onClick={() => router.push('/questionnaire/36')}
                 className="flex items-center gap-2 transition-colors"
                 style={{ color: '#2F6657' }}
                 aria-label="Go back"

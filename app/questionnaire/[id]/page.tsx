@@ -49,11 +49,11 @@ export default function QuestionnairePage() {
       return;
     }
     if (currentQuestion.type === 'progress') {
-      if (questionId === 14 || questionId === 17) {
+      if (questionId === 17) {
         router.push('/questionnaire/progress');
         return;
       }
-      if (questionId === 34) {
+      if (questionId === 37) {
         router.push('/questionnaire/progress-final');
         return;
       }
@@ -109,29 +109,17 @@ export default function QuestionnairePage() {
       return;
     }
 
-    // Show progress screen for question 14
-    if (questionId === 14) {
-      router.push('/questionnaire/progress');
-      return;
-    }
-
-    // Show progress screen for question 34
-    if (questionId === 34) {
-      router.push('/questionnaire/progress-final');
-      return;
-    }
-
     // Show loading screen for question 35
     if (questionId === 35) {
       router.push('/questionnaire/loading');
       return;
     }
 
-    // Navigate to next question or email page after all questions
-    if (questionId < questions.length) {
-      router.push(`/questionnaire/${questionId + 1}`);
+    // Navigate to next question - simple sequential approach
+    const nextId = questionId + 1;
+    if (nextId <= 38) { // Assuming max question ID is 38
+      router.push(`/questionnaire/${nextId}`);
     } else {
-      // After all questions, go to email page
       router.push('/email');
     }
   };
@@ -148,8 +136,9 @@ export default function QuestionnairePage() {
     }
   };
 
-  const totalSteps = 36; // Total steps in the flow
-  const currentStep = questionId; // Question 1 is at intro/1 (step 1), so question 2 = step 2, question 4 = step 4
+  const sortedQuestions = [...questions].sort((a, b) => a.id - b.id);
+  const totalSteps = sortedQuestions.length; // Total questions in the flow
+  const currentStep = sortedQuestions.findIndex(q => q.id === questionId) + 1; // Current step based on position in sorted array
   
   // Check if it's a dark screen (info screens with dark background)
   const isDarkScreen = currentQuestion.type === 'info' && 

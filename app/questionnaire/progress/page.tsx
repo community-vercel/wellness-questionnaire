@@ -64,11 +64,11 @@ export default function ProgressPage() {
   const formattedDateFull = targetDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); // "Mar 30, 2026"
 
   const handleContinue = () => {
-    router.push('/questionnaire/15');
+    router.push('/questionnaire/18');
   };
 
   const totalSteps = 36;
-  const currentStep = 14;
+  const currentStep = 17;
 
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#fff3e5' }}>
@@ -83,14 +83,14 @@ export default function ProgressPage() {
           </div>
         </div>
       </div>
-      
+
       <main className="flex-1 px-4 py-8">
         <div className="max-w-5xl mx-auto">
           {/* Back button and progress */}
           <div className="mb-12 max-w-3xl mx-auto">
             <div className="flex items-center justify-between mb-6">
               <button
-                onClick={() => router.push('/questionnaire/13')}
+                onClick={() => router.push('/questionnaire/16')}
                 className="flex items-center gap-2 transition-colors"
                 style={{ color: '#2F6657' }}
                 aria-label="Go back"

@@ -3,7 +3,7 @@ require('dotenv').config({ path: '.env.local' });
 const { initializeApp } = require('firebase/app');
 const { getFirestore, collection, doc, setDoc } = require('firebase/firestore');
 
-// Static questions data - copy from data/questions.ts
+// Correct questions data with unique IDs from data/questions.ts
 const questions = [
   {
     id: 1,
@@ -199,35 +199,6 @@ const questions = [
   },
   {
     id: 17,
-    type: 'progress',
-    question: 'Based on your answers so far',
-    description: 'Progress summary with graph and testimonial',
-  },
-  {
-    id: 18,
-    type: 'single-select',
-    question: 'How would you describe your activity level during the week?',
-    options: [
-      { label: 'Little or no exercise', value: 'little' },
-      { label: 'Lightly active (1-2 workouts)', value: 'light' },
-      { label: 'Moderately active (3-5 workouts)', value: 'moderate' },
-      { label: 'Very active (6-7 workouts)', value: 'very' },
-      { label: 'Highly active (daily exercise or sports and physical job)', value: 'highly' },
-    ],
-  },
-  {
-    id: 19,
-    type: 'single-select',
-    question: 'How long has it been since you had your ideal weight?',
-    options: [
-      { label: 'Less than 1 year', value: '<1' },
-      { label: '1-3 years', value: '1-3' },
-      { label: 'More than 3 years', value: '>3' },
-      { label: 'Never had it', value: 'never' },
-    ],
-  },
-  {
-    id: 20,
     type: 'single-select',
     question: 'What size clothes do you usually wear?',
     options: [
@@ -241,7 +212,7 @@ const questions = [
     ],
   },
   {
-    id: 21,
+    id: 18,
     type: 'single-select',
     question: 'What size clothes would you like to wear?',
     options: [
@@ -253,6 +224,31 @@ const questions = [
       { label: 'M', value: 'm' },
       { label: 'S or smaller', value: 's' },
     ],
+  },
+  {
+    id: 19,
+    type: 'testimonial',
+    question: '85% of KetoGo app users that stayed on their plan have reduced their clothing size at least by 1 size',
+    description: 'Testimonial with before/after image',
+  },
+  {
+    id: 20,
+    type: 'single-select',
+    question: 'How would you describe your eating habits?',
+    options: [
+      { label: 'I eat the same food almost every day', value: 'same' },
+      { label: 'I cook different variations of the same ingredients', value: 'variations' },
+      { label: 'I have a couple favourites that I switch between', value: 'favourites' },
+      { label: 'I eat a diverse range of foods', value: 'diverse' },
+      { label: 'I am not sure', value: 'unsure' },
+    ],
+  },
+  {
+    id: 21,
+    type: 'info',
+    question: 'Keto is very tasty!',
+    description: 'You\'ll find recipes according to your cooking level and preferences. All of them are delicious, healthy and perfect for losing weight. Enjoy rich, delicious meals every day!',
+    svgUrl: '',
   },
   {
     id: 22,
@@ -445,7 +441,7 @@ const questions = [
   },
 ];
 
-// Firebase config - replace with your actual config
+// Firebase config
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -455,121 +451,21 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-// Enhanced data cleaning function
-function cleanQuestionData(question) {
-  const cleaned = JSON.parse(JSON.stringify(question)); // Deep clone
-  
-  // Function to recursively clean object
-  function cleanObject(obj) {
-    if (Array.isArray(obj)) {
-      return obj.map(item => cleanObject(item));
-    } else if (obj !== null && typeof obj === 'object') {
-      const cleanedObj = {};
-      for (const [key, value] of Object.entries(obj)) {
-        // Skip undefined, null, empty strings
-        if (value === undefined || value === null || value === '') {
-          continue;
-        }
-        
-        // Recursively clean nested objects
-        if (typeof value === 'object') {
-          const cleanedValue = cleanObject(value);
-          // Only add if not empty after cleaning
-          if (Array.isArray(cleanedValue) && cleanedValue.length > 0) {
-            cleanedObj[key] = cleanedValue;
-          } else if (!Array.isArray(cleanedValue) && Object.keys(cleanedValue).length > 0) {
-            cleanedObj[key] = cleanedValue;
-          }
-        } else {
-          cleanedObj[key] = value;
-        }
-      }
-      return cleanedObj;
-    }
-    return obj;
-  }
-  
-  return cleanObject(cleaned);
-}
-
-// Validate Firebase config before initializing
-console.log('========== Firebase Configuration Check ==========');
-console.log('API Key:', firebaseConfig.apiKey ? `${firebaseConfig.apiKey.substring(0, 10)}...` : 'MISSING');
-console.log('Auth Domain:', firebaseConfig.authDomain || 'MISSING');
-console.log('Project ID:', firebaseConfig.projectId || 'MISSING');
-console.log('Storage Bucket:', firebaseConfig.storageBucket || 'MISSING');
-console.log('Messaging Sender ID:', firebaseConfig.messagingSenderId || 'MISSING');
-console.log('App ID:', firebaseConfig.appId ? `${firebaseConfig.appId.substring(0, 10)}...` : 'MISSING');
-console.log('==================================================\n');
-
-// Check for missing required fields
-const requiredFields = ['apiKey', 'authDomain', 'projectId', 'storageBucket', 'messagingSenderId', 'appId'];
-const missingFields = requiredFields.filter(field => !firebaseConfig[field]);
-
-if (missingFields.length > 0) {
-  console.error('❌ ERROR: Missing required Firebase configuration fields:');
-  missingFields.forEach(field => console.error(`  - ${field}`));
-  console.error('\nPlease check your .env file and ensure all NEXT_PUBLIC_FIREBASE_* variables are set correctly.');
-  process.exit(1);
-}
-
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 async function uploadQuestions() {
   try {
-    console.log('Starting upload...');
-    console.log('Total questions to upload:', questions.length);
-    console.log('');
-    
-    let successCount = 0;
-    let failCount = 0;
-    
+    console.log('Starting upload of corrected questions...');
     for (const question of questions) {
-      try {
-        const cleanedQuestion = cleanQuestionData(question);
-        
-        // Log the cleaned data for debugging (first question only)
-        if (question.id === 1) {
-          console.log('Sample cleaned data (question 1):');
-          console.log(JSON.stringify(cleanedQuestion, null, 2));
-          console.log('');
-        }
-        
-        const docRef = doc(db, 'questions', question.id.toString());
-        
-        await setDoc(docRef, cleanedQuestion);
-        console.log(`✓ Uploaded question ${question.id}: ${question.question.substring(0, 50)}...`);
-        successCount++;
-        
-        // Add a small delay to avoid rate limiting
-        await new Promise(resolve => setTimeout(resolve, 100));
-        
-      } catch (error) {
-        console.error(`✗ Failed to upload question ${question.id}:`, error.message);
-        console.error('Question data:', JSON.stringify(question, null, 2));
-        failCount++;
-      }
+      const docRef = doc(db, 'questions', question.id.toString());
+      await setDoc(docRef, question);
+      console.log(`✓ Uploaded question ${question.id}: ${question.question.substring(0, 50)}...`);
     }
-    
-    console.log('\n========== Upload Summary ==========');
-    console.log(`✓ Successfully uploaded: ${successCount} questions`);
-    console.log(`✗ Failed: ${failCount} questions`);
+    console.log('\n🎉 All questions uploaded successfully!');
     console.log(`Total: ${questions.length} questions`);
-    console.log('====================================\n');
-    
-    if (failCount === 0) {
-      console.log('🎉 All questions uploaded successfully!');
-      process.exit(0);
-    } else {
-      console.log('⚠️  Some questions failed to upload. Please check the errors above.');
-      process.exit(1);
-    }
   } catch (error) {
-    console.error('✗ Fatal error during upload:', error);
-    console.error('Error details:', error.message);
-    console.error('Stack trace:', error.stack);
-    process.exit(1);
+    console.error('❌ Error uploading questions:', error);
   }
 }
 
