@@ -15,11 +15,11 @@ export default function TestimonialPage() {
   }, []);
 
   const handleContinue = () => {
-    router.push('/questionnaire/23');
+    router.push('/questionnaire/20');
   };
 
-  const totalSteps = 38;
-  const currentStep = 22;
+  const totalSteps = 35;
+  const currentStep = 19;
 
   // Gender-specific content
   const isFemale = gender === 'female';

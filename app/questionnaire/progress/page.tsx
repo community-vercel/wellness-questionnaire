@@ -64,14 +64,14 @@ export default function ProgressPage() {
   const formattedDateFull = targetDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); // "Mar 30, 2026"
 
   const handleContinue = () => {
-    router.push('/questionnaire/18');
+    router.push('/questionnaire/15');
   };
 
-  const totalSteps = 36;
-  const currentStep = 17;
+  const totalSteps = 35;
+  const currentStep = 14;
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#fff3e5' }}>
+    <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#FDF7F2' }}>
       {/* Logo only - no nav, no bg */}
       <div className="w-full px-4 sm:px-6 py-3 relative z-20">
         <div className="max-w-7xl mx-auto flex items-center">
@@ -90,7 +90,7 @@ export default function ProgressPage() {
           <div className="mb-12 max-w-3xl mx-auto">
             <div className="flex items-center justify-between mb-6">
               <button
-                onClick={() => router.push('/questionnaire/16')}
+                onClick={() => router.push('/questionnaire/13')}
                 className="flex items-center gap-2 transition-colors"
                 style={{ color: '#2F6657' }}
                 aria-label="Go back"
@@ -99,7 +99,7 @@ export default function ProgressPage() {
                   <path d="M19 12H5M12 19l-7-7 7-7"/>
                 </svg>
               </button>
-              <div className="text-sm font-semibold" style={{ color: '#a07e67', fontSize: '0.875rem', fontWeight: 600 }}>
+              <div className="text-sm font-semibold" style={{ color: '#2F6657', fontSize: '0.875rem', fontWeight: 600 }}>
                 {currentStep}/{totalSteps}
               </div>
             </div>
@@ -108,7 +108,7 @@ export default function ProgressPage() {
 
           {/* Main Content */}
           <div className="text-center mb-6 max-w-xs mx-auto">
-            <p className="text-sm font-semibold mb-2" style={{ color: '#a07e67', fontSize: '0.875rem' }}>
+            <p className="text-sm font-semibold mb-2" style={{ color: '#000000', fontSize: '0.875rem' }}>
               Based on your answers so far
             </p>
             <h1 className="text-xl md:text-2xl font-extrabold mb-6 leading-tight" style={{ color: '#2F6657', fontSize: 'clamp(1.25rem, 2.5vw, 1.5rem)' }}>
@@ -117,7 +117,7 @@ export default function ProgressPage() {
           </div>
 
           {/* Weight Loss Graph */}
-          <div className="rounded-2xl p-4 mb-6 max-w-xl mx-auto" style={{ backgroundColor: '#fff3e5' }} ref={graphRef}>
+          <div className="rounded-2xl p-4 mb-6 max-w-xl mx-auto" style={{ backgroundColor: '#FDF7F2' }} ref={graphRef}>
             <div className="relative h-64" style={{ padding: '1rem 1.5rem 2rem 1.5rem' }}>
               {/* Grid lines - 4 equal segments (2 grid lines at 33.33% and 66.66%) */}
               <div className="absolute inset-0" style={{ padding: '1rem 1.5rem 2rem 1.5rem' }}>

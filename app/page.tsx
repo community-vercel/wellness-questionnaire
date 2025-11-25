@@ -133,7 +133,7 @@ const router=useRouter()
       </main>
 
       <div className="mb-2 pb-5"></div>
-      <Footer />
+      <Footer isLandingPage={true} />
     </div>
   );
 }

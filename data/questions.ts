@@ -173,53 +173,19 @@ export const questions: Question[] = [
   },
   {
     id: 13,
-    type: 'single-select',
-    question: 'How active are you?',
-    options: [
-      { label: 'Sedentary (little or no exercise)', value: 'sedentary', icon: '🛋️' },
-      { label: 'Lightly active (1-3 days/week)', value: 'light', icon: '🚶' },
-      { label: 'Moderately active (3-5 days/week)', value: 'moderate', icon: '🏃' },
-      { label: 'Very active (6-7 days/week)', value: 'very', icon: '🏋️' },
-    ],
-  },
-  {
-    id: 14,
-    type: 'single-select',
-    question: 'How often do you exercise?',
-    options: [
-      { label: 'Never', value: 'never', icon: '❌' },
-      { label: '1-2 times per week', value: '1-2', icon: '✅' },
-      { label: '3-4 times per week', value: '3-4', icon: '✅✅' },
-      { label: '5+ times per week', value: '5+', icon: '✅✅✅' },
-    ],
-  },
-  {
-    id: 15,
-    type: 'single-select',
-    question: 'Do you have any health conditions?',
-    options: [
-      { label: 'No', value: 'no', icon: '✅' },
-      { label: 'Diabetes', value: 'diabetes', icon: '🩺' },
-      { label: 'High blood pressure', value: 'bp', icon: '🩺' },
-      { label: 'Heart disease', value: 'heart', icon: '🩺' },
-      { label: 'Other', value: 'other', icon: '🩺' },
-    ],
-  },
-  {
-    id: 16,
     type: 'text-input',
     question: 'Your Keto weight loss journey is about to begin!',
     description: 'What is your name?',
     unit: 'name',
   },
   {
-    id: 17,
+    id: 14,
     type: 'progress',
     question: 'Based on your answers so far',
     description: 'Progress summary with graph and testimonial',
   },
   {
-    id: 18,
+    id: 15,
     type: 'single-select',
     question: 'How would you describe your activity level during the week?',
     options: [
@@ -231,7 +197,7 @@ export const questions: Question[] = [
     ],
   },
   {
-    id: 19,
+    id: 16,
     type: 'single-select',
     question: 'How long has it been since you had your ideal weight?',
     options: [
@@ -242,7 +208,7 @@ export const questions: Question[] = [
     ],
   },
   {
-    id: 20,
+    id: 17,
     type: 'single-select',
     question: 'What size clothes do you usually wear?',
     options: [
@@ -256,7 +222,7 @@ export const questions: Question[] = [
     ],
   },
   {
-    id: 21,
+    id: 18,
     type: 'single-select',
     question: 'What size clothes would you like to wear?',
     options: [
@@ -270,13 +236,13 @@ export const questions: Question[] = [
     ],
   },
   {
-    id: 22,
+    id: 19,
     type: 'testimonial',
     question: '85% of KetoGo app users that stayed on their plan have reduced their clothing size at least by 1 size',
     description: 'Testimonial with before/after image',
   },
   {
-    id: 23,
+    id: 20,
     type: 'single-select',
     question: 'How would you describe your eating habits?',
     options: [
@@ -288,14 +254,14 @@ export const questions: Question[] = [
     ],
   },
   {
-    id: 24,
+    id: 21,
     type: 'info',
     question: 'Keto is very tasty!',
     description: 'You\'ll find recipes according to your cooking level and preferences. All of them are delicious, healthy and perfect for losing weight. Enjoy rich, delicious meals every day!',
     svgUrl: '',
   },
   {
-    id: 25,
+    id: 22,
     type: 'multi-select',
     question: 'Pick up to 5 favourite ingredients from this list',
     options: [
@@ -311,7 +277,7 @@ export const questions: Question[] = [
     ],
   },
   {
-    id: 26,
+    id: 23,
     type: 'multi-select',
     question: 'What is your preferred protein?',
     description: 'Pick as much as you like',
@@ -328,7 +294,7 @@ export const questions: Question[] = [
     ],
   },
   {
-    id: 27,
+    id: 24,
     type: 'multi-select',
     question: 'Do you have any food allergies or intolerances?',
     description: 'Pick as many as applicable',
@@ -344,14 +310,14 @@ export const questions: Question[] = [
     ],
   },
   {
-    id: 28,
+    id: 25,
     type: 'info',
     question: 'Your personalised Keto meal plan is being built',
     description: '600+ recipes that match your preferences. You\'ll love your new meal plan!',
     svgUrl: '',
   },
   {
-    id: 29,
+    id: 26,
     type: 'single-select',
     question: 'How much sleep do you typically get per night?',
     options: [
@@ -362,7 +328,7 @@ export const questions: Question[] = [
     ],
   },
   {
-    id: 30,
+    id: 27,
     type: 'single-select',
     question: 'How many glasses of water do you usually drink per day?',
     options: [
@@ -374,7 +340,7 @@ export const questions: Question[] = [
     ],
   },
   {
-    id: 31,
+    id: 28,
     type: 'single-select',
     question: 'What are your working hours?',
     options: [
@@ -385,7 +351,7 @@ export const questions: Question[] = [
     ],
   },
   {
-    id: 32,
+    id: 29,
     type: 'single-select',
     question: 'Describe your average day',
     options: [
@@ -396,7 +362,7 @@ export const questions: Question[] = [
     ],
   },
   {
-    id: 33,
+    id: 30,
     type: 'multi-select',
     question: 'Are you taking any medication?',
     options: [
@@ -409,7 +375,7 @@ export const questions: Question[] = [
     ],
   },
   {
-    id: 34,
+    id: 31,
     type: 'multi-select',
     question: 'Do you have any of these health conditions?',
     options: [
@@ -425,7 +391,7 @@ export const questions: Question[] = [
     ],
   },
   {
-    id: 35,
+    id: 32,
     type: 'multi-select',
     question: 'What goal would you like to achieve in addition to weight loss?',
     options: [
@@ -440,20 +406,20 @@ export const questions: Question[] = [
     ],
   },
   {
-    id: 36,
+    id: 33,
     type: 'info',
     question: 'It\'s not just your body! Here\'s how weight loss can change your face!',
     description: 'Weight loss can remove a lot of fat and roundness in the face, around the eyes, below jawline and chin giving your skin a younger and healthier look.',
     svgUrl: '',
   },
   {
-    id: 37,
+    id: 34,
     type: 'progress',
     question: 'With the right motivation and persistence we predict you\'ll reach your goal even faster!',
     description: 'Progress summary with graph and testimonial',
   },
   {
-    id: 38,
+    id: 35,
     type: 'loading',
     question: 'Preparing your plan. Please wait to see your results!',
     description: 'Loading screen with circular progress',

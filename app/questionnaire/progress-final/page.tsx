@@ -69,16 +69,16 @@ export default function ProgressFinalPage() {
   const formattedDateFull = targetDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); // "Mar 25, 2026"
 
   const handleContinue = () => {
-    // Save answer for question 37 (progress screen)
+    // Save answer for question 34 (progress screen)
     const savedAnswers = localStorage.getItem('answers');
     const answers = savedAnswers ? JSON.parse(savedAnswers) : {};
-    answers[37] = { value: 'continue', type: 'progress' };
+    answers[34] = { value: 'continue', type: 'progress' };
     localStorage.setItem('answers', JSON.stringify(answers));
 
-    router.push('/questionnaire/38');
+    router.push('/questionnaire/35');
   };
 
-  const totalSteps = 36;
+  const totalSteps = 35;
   const currentStep = 37;
 
   return (

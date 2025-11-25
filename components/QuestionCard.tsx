@@ -105,7 +105,7 @@ export default function QuestionCard({ question, onAnswer, initialAnswer }: Ques
     
     return (
       <div className="w-full max-w-5xl mx-auto">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-center mb-12 leading-tight" style={{ color: '#2F6657', fontSize: 'clamp(1.875rem, 4vw, 2.75rem)' }}>
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-center mb-12 leading-tight" style={{ color: '#000000', fontSize: 'clamp(1.875rem, 4vw, 2.75rem)', fontWeight: 800 }}>
           {question.question}
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
@@ -119,18 +119,19 @@ export default function QuestionCard({ question, onAnswer, initialAnswer }: Ques
             }
             
             const bgColor = option.bgColor || '#E8DDD0';
+            const isSelected = answer === option.value;
             
             return (
               <button
                 key={option.value}
                 onClick={() => handleSingleSelect(option.value)}
-                className="group relative rounded-lg overflow-hidden hover:scale-[1.02] transition-all duration-200 shadow-md hover:shadow-lg"
+                className="group relative rounded-lg overflow-hidden hover:scale-[1.02] transition-all duration-200"
                 style={{
                   backgroundColor: '#ffefdb',
-                  border: '1px solid #f2e1cc'
+                  border: isSelected ? '2px solid #f9bf93' : '1px solid #f2e1cc'
                 }}
               >
-                <div className="w-full p-3.5">
+                <div className="w-full p-3">
                   <div 
                     className="w-full aspect-[3/4] rounded-md overflow-hidden mb-2.5"
                     style={{ backgroundColor: bgColor }}
@@ -152,7 +153,9 @@ export default function QuestionCard({ question, onAnswer, initialAnswer }: Ques
                       </div>
                     )}
                   </div>
-                  <span className="text-sm font-bold text-gray-900 block text-center">{option.label}</span>
+                  <span className="text-sm font-bold block text-center" style={{ color: '#000000', fontSize: '0.875rem', fontWeight: 700 }}>
+                    {option.label}
+                  </span>
                 </div>
               </button>
             );
@@ -437,11 +440,11 @@ export default function QuestionCard({ question, onAnswer, initialAnswer }: Ques
     // Regular info screen (light background)
     return (
       <div className="w-full max-w-2xl mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6 max-w-2xl mx-auto leading-tight" style={{ color: '#2F6657', fontSize: 'clamp(1.875rem, 4vw, 2.75rem)' }}>
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6 max-w-2xl mx-auto leading-tight" style={{ color: '#000000', fontSize: 'clamp(1.875rem, 4vw, 2.75rem)', fontWeight: 800 }}>
           {question.question}
         </h2>
         {question.description && (
-          <p className="text-base md:text-lg text-gray-700 mb-8 max-w-2xl mx-auto leading-relaxed" style={{ fontSize: '1.125rem' }}>
+          <p className="text-base md:text-lg mb-8 max-w-2xl mx-auto leading-relaxed" style={{ fontSize: '1.125rem', color: '#000000' }}>
             {question.description}
           </p>
         )}
@@ -458,7 +461,7 @@ export default function QuestionCard({ question, onAnswer, initialAnswer }: Ques
           <button
             onClick={() => onAnswer('continue')}
             className="w-full max-w-xs font-bold py-4 px-8 rounded-2xl transition-all duration-300 shadow-lg hover:shadow-xl text-lg"
-            style={{ backgroundColor: '#2F6657', color: '#FFFFFF' }}
+            style={{ backgroundColor: '#2F6657', color: '#FFFFFF', fontWeight: 700 }}
           >
             Next
           </button>
@@ -491,11 +494,11 @@ export default function QuestionCard({ question, onAnswer, initialAnswer }: Ques
       const gender = typeof window !== 'undefined' ? localStorage.getItem('gender') : null;
       
       return (
-        <div className="w-full max-w-2xl mx-auto">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-center mb-12 leading-tight" style={{ color: '#2F6657', fontSize: 'clamp(1.875rem, 4vw, 2.75rem)' }}>
+        <div className="w-full mx-auto">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-center mb-12 leading-tight max-w-3xl mx-auto" style={{ color: '#000000', fontSize: 'clamp(1.875rem, 4vw, 2.75rem)', fontWeight: 800 }}>
             {question.question}
           </h2>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3 max-w-xl mx-auto">
             {question.options?.map((option) => {
               // Select image based on gender
               let imageUrl = option.icon;
@@ -509,22 +512,22 @@ export default function QuestionCard({ question, onAnswer, initialAnswer }: Ques
                 <button
                   key={option.value}
                   onClick={() => handleSingleSelect(option.value)}
-                  className="group relative hover:opacity-90 transition-all duration-200 overflow-hidden"
+                  className="group relative hover:opacity-90 transition-all duration-200 overflow-hidden w-full"
                   style={{
                     backgroundColor: '#ffefdb',
-                    borderColor: answer === option.value ? '#2F6657' : '#f2e1cc',
+                    borderColor: answer === option.value ? '#f9bf93' : '#f2e1cc',
                     borderWidth: answer === option.value ? '2px' : '1px',
                     borderStyle: 'solid',
                     borderRadius: '8px',
-                    boxShadow: answer === option.value ? '0 2px 4px rgba(47, 102, 87, 0.2)' : '0 1px 2px rgba(0,0,0,0.05)'
+                    minHeight: '72px'
                   }}
                 >
-                  <div className="p-5 flex items-center gap-4">
-                    <span className="text-base font-semibold text-gray-900 flex-1 text-left" style={{ fontSize: '1rem', fontWeight: 600 }}>
+                  <div className="p-4 flex items-center gap-3">
+                    <span className="text-base font-semibold flex-1 text-left" style={{ fontSize: '0.9375rem', fontWeight: 600, color: '#000000' }}>
                       {option.label}
                     </span>
                     {imageUrl && (
-                      <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-gray-200 flex-shrink-0">
+                      <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-gray-200 flex-shrink-0">
                         <img 
                           src={imageUrl} 
                           alt={option.label}
@@ -547,38 +550,38 @@ export default function QuestionCard({ question, onAnswer, initialAnswer }: Ques
     
     // Simple list selection - pixel perfect styling
     return (
-      <div className="w-full max-w-2xl mx-auto">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-center mb-12 leading-tight" style={{ color: '#2F6657', fontSize: 'clamp(1.875rem, 4vw, 2.75rem)' }}>
+      <div className="w-full mx-auto">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-center mb-12 leading-tight max-w-3xl mx-auto" style={{ color: '#000000', fontSize: 'clamp(1.875rem, 4vw, 2.75rem)', fontWeight: 800 }}>
           {question.question}
         </h2>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-3 max-w-xl mx-auto">
           {question.options?.map((option) => (
             <button
               key={option.value}
               onClick={() => handleSingleSelect(option.value)}
-              className="group relative overflow-hidden transition-all duration-200"
+              className="group relative overflow-hidden transition-all duration-200 w-full"
               style={{
                 backgroundColor: '#ffefdb',
-                borderColor: answer === option.value ? '#2F6657' : '#f2e1cc',
+                borderColor: answer === option.value ? '#f9bf93' : '#f2e1cc',
                 borderWidth: answer === option.value ? '2px' : '1px',
                 borderStyle: 'solid',
                 borderRadius: '8px',
-                boxShadow: answer === option.value ? '0 2px 4px rgba(47, 102, 87, 0.2)' : '0 1px 2px rgba(0,0,0,0.05)'
+                minHeight: '72px'
               }}
             >
-              <div className="p-5 flex items-center gap-4">
+              <div className="p-4 flex items-center gap-3">
                 <div 
-                  className="w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all"
+                  className="w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all flex-shrink-0"
                   style={{ 
                     borderColor: answer === option.value ? '#2F6657' : '#D3D3D3',
                     backgroundColor: answer === option.value ? '#2F6657' : 'transparent'
                   }}
                 >
                   {answer === option.value && (
-                    <div className="w-3 h-3 rounded-full bg-white"></div>
+                    <div className="w-2.5 h-2.5 rounded-full bg-white"></div>
                   )}
                 </div>
-                <span className="text-base font-semibold text-gray-900 flex-1 text-left" style={{ fontSize: '1rem', fontWeight: 600 }}>
+                <span className="text-base font-semibold flex-1 text-left" style={{ fontSize: '0.9375rem', fontWeight: 600, color: '#000000' }}>
                   {option.label}
                 </span>
               </div>
@@ -594,45 +597,46 @@ export default function QuestionCard({ question, onAnswer, initialAnswer }: Ques
     const canSelectMore = maxSelections ? selectedMultiple.length < maxSelections : true;
     
     return (
-      <div className="w-full max-w-2xl mx-auto">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-center mb-4 leading-tight" style={{ color: '#2F6657', fontSize: 'clamp(1.875rem, 4vw, 2.75rem)' }}>
+      <div className="w-full mx-auto">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-center mb-4 leading-tight max-w-3xl mx-auto" style={{ color: '#000000', fontSize: 'clamp(1.875rem, 4vw, 2.75rem)', fontWeight: 800 }}>
           {question.question}
         </h2>
         {question.description && (
-          <p className="text-base text-gray-600 text-center mb-8" style={{ fontSize: '1rem' }}>
+          <p className="text-base text-center mb-8 max-w-3xl mx-auto" style={{ fontSize: '1rem', color: '#000000' }}>
             {question.description}
           </p>
         )}
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-3 max-w-xl mx-auto">
           {question.options?.map((option) => (
             <button
               key={option.value}
               onClick={() => handleMultiSelect(option.value)}
-              className="group relative overflow-hidden transition-all duration-200"
+              className="group relative overflow-hidden transition-all duration-200 w-full"
               style={{
                 backgroundColor: '#ffefdb',
-                borderColor: selectedMultiple.includes(option.value) ? '#2F6657' : '#f2e1cc',
+                borderColor: selectedMultiple.includes(option.value) ? '#f9bf93' : '#f2e1cc',
                 borderWidth: selectedMultiple.includes(option.value) ? '2px' : '1px',
                 borderStyle: 'solid',
                 borderRadius: '8px',
-                boxShadow: selectedMultiple.includes(option.value) ? '0 2px 4px rgba(47, 102, 87, 0.2)' : '0 1px 2px rgba(0,0,0,0.05)'
+                minHeight: '72px'
               }}
             >
-              <div className="p-5 flex items-center gap-4">
+              <div className="p-4 flex items-center gap-3">
                 <div 
-                  className="w-6 h-6 rounded border-2 flex items-center justify-center transition-all"
+                  className="w-5 h-5 rounded border-2 flex items-center justify-center transition-all"
                   style={{ 
                     borderColor: selectedMultiple.includes(option.value) ? '#2F6657' : '#D3D3D3',
-                    backgroundColor: selectedMultiple.includes(option.value) ? '#2F6657' : 'transparent'
+                    backgroundColor: selectedMultiple.includes(option.value) ? '#2F6657' : 'transparent',
+                    borderRadius: '4px'
                   }}
                 >
                   {selectedMultiple.includes(option.value) && (
-                    <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                    <svg className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                   )}
                 </div>
-                <span className="text-base font-semibold text-gray-900 flex-1 text-left" style={{ fontSize: '1rem', fontWeight: 600 }}>
+                <span className="text-base font-semibold flex-1 text-left" style={{ fontSize: '0.9375rem', fontWeight: 600, color: '#000000' }}>
                   {option.label}
                 </span>
               </div>
@@ -644,7 +648,7 @@ export default function QuestionCard({ question, onAnswer, initialAnswer }: Ques
             onClick={() => onAnswer(selectedMultiple)}
             disabled={selectedMultiple.length === 0}
             className="w-full max-w-xs font-bold py-4 px-8 rounded-2xl transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-40 disabled:cursor-not-allowed text-lg"
-            style={{ backgroundColor: '#2F6657', color: '#FFFFFF' }}
+            style={{ backgroundColor: '#2F6657', color: '#FFFFFF', fontWeight: 700 }}
           >
             Next
           </button>
@@ -660,11 +664,11 @@ export default function QuestionCard({ question, onAnswer, initialAnswer }: Ques
     if (isNameInput) {
       return (
         <div className="w-full max-w-2xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-center mb-6 leading-tight" style={{ color: '#12573d', fontSize: 'clamp(1.875rem, 4vw, 2.75rem)' }}>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-center mb-6 leading-tight" style={{ color: '#000000', fontSize: 'clamp(1.875rem, 4vw, 2.75rem)', fontWeight: 800 }}>
             {question.question}
           </h2>
           {question.description && (
-            <p className="text-xl md:text-2xl font-semibold text-center mb-10" style={{ color: '#12573d', fontSize: 'clamp(1.25rem, 3vw, 1.5rem)' }}>
+            <p className="text-xl md:text-2xl font-semibold text-center mb-10" style={{ color: '#000000', fontSize: 'clamp(1.25rem, 3vw, 1.5rem)', fontWeight: 600 }}>
               {question.description}
             </p>
           )}
@@ -675,7 +679,7 @@ export default function QuestionCard({ question, onAnswer, initialAnswer }: Ques
               onChange={(e) => handleTextInput(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && handleSubmitText()}
               className="w-full focus:outline-none bg-transparent text-lg"
-              style={{ color: '#2F6657' }}
+              style={{ color: '#000000' }}
               placeholder=""
               autoFocus
             />
@@ -787,7 +791,7 @@ export default function QuestionCard({ question, onAnswer, initialAnswer }: Ques
     
     return (
       <div className="w-full max-w-2xl mx-auto">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-center mb-8 leading-tight" style={{ color: '#12573d', fontSize: 'clamp(1.875rem, 4vw, 2.5rem)' }}>
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-center mb-8 leading-tight" style={{ color: '#000000', fontSize: 'clamp(1.875rem, 4vw, 2.5rem)', fontWeight: 800 }}>
           {question.question}
         </h2>
         <div className="flex flex-col items-center">
@@ -803,7 +807,7 @@ export default function QuestionCard({ question, onAnswer, initialAnswer }: Ques
                 style={
                   unit === 'cm'
                     ? { backgroundColor: '#2F6657', border: '1px solid #2F6657' }
-                    : { backgroundColor: '#fcf7f0', color: '#2F6657', border: '1px solid #E0E0E0' }
+                    : { backgroundColor: '#fcf7f0', color: '#000000', border: '1px solid #E0E0E0' }
                 }
               >
                 cm
@@ -818,7 +822,7 @@ export default function QuestionCard({ question, onAnswer, initialAnswer }: Ques
                 style={
                   unit === 'ft/in'
                     ? { backgroundColor: '#2F6657', border: '1px solid #2F6657' }
-                    : { backgroundColor: '#fcf7f0', color: '#2F6657', border: '1px solid #E0E0E0' }
+                    : { backgroundColor: '#fcf7f0', color: '#000000', border: '1px solid #E0E0E0' }
                 }
               >
                 ft/in
@@ -838,7 +842,7 @@ export default function QuestionCard({ question, onAnswer, initialAnswer }: Ques
                 style={
                   unit === 'kg'
                     ? { backgroundColor: '#2F6657', border: '1px solid #2F6657' }
-                    : { backgroundColor: '#fcf7f0', color: '#2F6657', border: '1px solid #E0E0E0' }
+                    : { backgroundColor: '#fcf7f0', color: '#000000', border: '1px solid #E0E0E0' }
                 }
               >
                 kg
@@ -853,7 +857,7 @@ export default function QuestionCard({ question, onAnswer, initialAnswer }: Ques
                 style={
                   unit === 'lb'
                     ? { backgroundColor: '#2F6657', border: '1px solid #2F6657' }
-                    : { backgroundColor: '#fcf7f0', color: '#2F6657', border: '1px solid #E0E0E0' }
+                    : { backgroundColor: '#fcf7f0', color: '#000000', border: '1px solid #E0E0E0' }
                 }
               >
                 lb
@@ -864,7 +868,7 @@ export default function QuestionCard({ question, onAnswer, initialAnswer }: Ques
           {isGoalWeight && suggestedWeight && (
             <div className="mb-6 text-center">
               <p className="text-base font-bold text-gray-700 mb-2" style={{ fontSize: '1rem' }}>
-                Suggested ideal weight: <span style={{ color: '#2F6657' }}>{suggestedWeight.idealWeight} {unit}</span>
+                Suggested ideal weight: <span style={{ color: '#000000' }}>{suggestedWeight.idealWeight} {unit}</span>
               </p>
               <p className="text-sm text-gray-600" style={{ fontSize: '0.875rem' }}>
                 Consider your goal weight somewhere within a healthy range of {suggestedWeight.minWeight} {unit} to {suggestedWeight.maxWeight} {unit}
@@ -880,7 +884,7 @@ export default function QuestionCard({ question, onAnswer, initialAnswer }: Ques
                 onChange={(e) => handleTextInput(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSubmitText()}
                 className="flex-1 focus:outline-none bg-transparent text-3xl font-bold"
-                style={{ color: '#2F6657', padding: '0.5rem 0', minWidth: '0' }}
+                style={{ color: '#000000', padding: '0.5rem 0', minWidth: '0' }}
                 placeholder="0"
                 autoFocus={hasUnitToggle}
               />

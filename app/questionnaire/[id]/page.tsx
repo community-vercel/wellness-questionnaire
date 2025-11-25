@@ -53,11 +53,11 @@ export default function QuestionnairePage() {
       return;
     }
     if (currentQuestion.type === 'progress') {
-      if (questionId === 17) {
+      if (questionId === 14) {
         router.push('/questionnaire/progress');
         return;
       }
-      if (questionId === 37) {
+      if (questionId === 34) {
         router.push('/questionnaire/progress-final');
         return;
       }
@@ -121,7 +121,7 @@ export default function QuestionnairePage() {
 
     // Navigate to next question - simple sequential approach
     const nextId = questionId + 1;
-    if (nextId <= 38) { // Assuming max question ID is 38
+    if (nextId <= 35) { // Max question ID is 35
       router.push(`/questionnaire/${nextId}`);
     } else {
       router.push('/email');
@@ -152,7 +152,7 @@ export default function QuestionnairePage() {
      currentQuestion.question.includes("It's not just your body"));
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ backgroundColor: isDarkScreen ? '#2F6657' : '#fff3e5' }}>
+    <div className="min-h-screen flex flex-col" style={{ backgroundColor: isDarkScreen ? '#2F6657' : '#FDF7F2' }}>
       {/* Logo only - no nav, no bg */}
       {!isDarkScreen && (
         <div className="w-full px-4 sm:px-6 py-3 relative z-20">
@@ -183,7 +183,7 @@ export default function QuestionnairePage() {
                     <path d="M19 12H5M12 19l-7-7 7-7"/>
                   </svg>
                 </button>
-                <div className="text-sm font-semibold" style={{ color: '#a07e67', fontSize: '0.875rem', fontWeight: 600 }}>
+                <div className="text-sm font-semibold" style={{ color: '#2F6657', fontSize: '0.875rem', fontWeight: 600 }}>
                   {currentStep}/{totalSteps}
                 </div>
               </div>
@@ -192,7 +192,7 @@ export default function QuestionnairePage() {
           )}
 
           {/* Question card */}
-          <div className={isDarkScreen ? '' : 'mb-12'}>
+          <div className={isDarkScreen ? '' : 'mb-40'}>
             <QuestionCard
               question={currentQuestion}
               onAnswer={handleAnswer}
