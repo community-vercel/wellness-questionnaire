@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   description: 'Life changing results with WellnessGo once and for all!',
 }
 
+
+
+
 export default function RootLayout({
   children,
 }: {

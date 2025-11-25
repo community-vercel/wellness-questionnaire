@@ -21,7 +21,11 @@ export default function ProgressFinalPage() {
   }, []);
 
   useEffect(() => {
-    // Calculate exact node positions for the curve
+
+
+
+
+
     if (startNodeRef.current && endNodeRef.current && graphRef.current) {
       const graphRect = graphRef.current.getBoundingClientRect();
       const startRect = startNodeRef.current.getBoundingClientRect();

@@ -8,6 +8,10 @@ import QuestionCard from '@/components/QuestionCard';
 import { fetchQuestions } from '@/lib/questions';
 import { Question } from '@/data/questions';
 
+
+
+
+
 export default function QuestionnairePage() {
   const router = useRouter();
   const params = useParams();
