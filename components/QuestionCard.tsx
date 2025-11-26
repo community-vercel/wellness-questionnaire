@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Question } from '@/data/questions';
 
 interface QuestionCardProps {
@@ -31,8 +31,43 @@ export default function QuestionCard({ question, onAnswer, initialAnswer }: Ques
     if (question.unit === 'kg' || question.unit === 'lb') {
       return question.unit;
     }
+    if (question.unit === 'height') {
+      return 'cm';
+    }
     return question.unit || 'cm';
   });
+
+  // Initialize goal weight with suggested ideal weight if no answer exists
+  useEffect(() => {
+    const initialAnswerValue = getInitialAnswer();
+    if (question.id === 11 && question.type === 'text-input' && !initialAnswerValue) {
+      const savedAnswers = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('answers') || '{}') : {};
+      const heightAnswer = savedAnswers[9]; // Question 9 is height
+      const currentWeightAnswer = savedAnswers[10]; // Question 10 is current weight
+      
+      if (heightAnswer && currentWeightAnswer) {
+        let heightInMeters = 1.7; // default
+        if (heightAnswer.unit === 'cm') {
+          heightInMeters = parseFloat(heightAnswer.value) / 100;
+        } else if (heightAnswer.unit === 'ft/in') {
+          const parts = heightAnswer.value.split("'");
+          if (parts.length === 2) {
+            const feet = parseFloat(parts[0]);
+            const inches = parseFloat(parts[1].replace('"', ''));
+            heightInMeters = (feet * 0.3048) + (inches * 0.0254);
+          }
+        }
+        
+        // Calculate ideal BMI (22 is considered ideal)
+        const idealBMI = 22;
+        const idealWeightKg = idealBMI * (heightInMeters * heightInMeters);
+        const idealWeight = Math.round(idealWeightKg);
+        
+        setAnswer(idealWeight.toString());
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleSingleSelect = (value: string) => {
     setAnswer(value);
@@ -562,7 +597,7 @@ export default function QuestionCard({ question, onAnswer, initialAnswer }: Ques
               className="group relative overflow-hidden transition-all duration-200 w-full"
               style={{
                 backgroundColor: '#ffefdb',
-                borderColor: answer === option.value ? '#f9bf93' : '#f2e1cc',
+                borderColor: answer === option.value ? '#93C5FD' : '#f2e1cc',
                 borderWidth: answer === option.value ? '2px' : '1px',
                 borderStyle: 'solid',
                 borderRadius: '8px',
@@ -573,12 +608,12 @@ export default function QuestionCard({ question, onAnswer, initialAnswer }: Ques
                 <div 
                   className="w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all flex-shrink-0"
                   style={{ 
-                    borderColor: answer === option.value ? '#2F6657' : '#D3D3D3',
-                    backgroundColor: answer === option.value ? '#2F6657' : 'transparent'
+                    borderColor: answer === option.value ? '#22C55E' : '#FFB84D',
+                    backgroundColor: 'transparent'
                   }}
                 >
                   {answer === option.value && (
-                    <div className="w-2.5 h-2.5 rounded-full bg-white"></div>
+                    <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#22C55E' }}></div>
                   )}
                 </div>
                 <span className="text-base font-semibold flex-1 text-left" style={{ fontSize: '0.9375rem', fontWeight: 600, color: '#000000' }}>
@@ -625,13 +660,13 @@ export default function QuestionCard({ question, onAnswer, initialAnswer }: Ques
                 <div 
                   className="w-5 h-5 rounded border-2 flex items-center justify-center transition-all"
                   style={{ 
-                    borderColor: selectedMultiple.includes(option.value) ? '#2F6657' : '#D3D3D3',
-                    backgroundColor: selectedMultiple.includes(option.value) ? '#2F6657' : 'transparent',
+                    borderColor: selectedMultiple.includes(option.value) ? '#22C55E' : '#FFB84D',
+                    backgroundColor: 'transparent',
                     borderRadius: '4px'
                   }}
                 >
                   {selectedMultiple.includes(option.value) && (
-                    <svg className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="#22C55E" strokeWidth={3}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                   )}
@@ -880,13 +915,23 @@ export default function QuestionCard({ question, onAnswer, initialAnswer }: Ques
             <div className="flex items-center justify-between w-full">
               <input
                 type="text"
-                value={answer || (isGoalWeight && suggestedWeight ? suggestedWeight.idealWeight.toString() : '')}
-                onChange={(e) => handleTextInput(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && handleSubmitText()}
+                value={isGoalWeight && suggestedWeight ? suggestedWeight.idealWeight.toString() : (answer || '')}
+                onChange={(e) => {
+                  if (!isGoalWeight) {
+                    handleTextInput(e.target.value);
+                  }
+                  // For goal weight, always use suggested weight, don't allow user input
+                }}
+                onKeyPress={(e) => {
+                  if (!isGoalWeight && e.key === 'Enter') {
+                    handleSubmitText();
+                  }
+                }}
+                readOnly={isGoalWeight && suggestedWeight ? true : false}
                 className="flex-1 focus:outline-none bg-transparent text-3xl font-bold"
                 style={{ color: '#000000', padding: '0.5rem 0', minWidth: '0' }}
-                placeholder="0"
-                autoFocus={hasUnitToggle}
+                placeholder={isGoalWeight && suggestedWeight ? suggestedWeight.idealWeight.toString() : "0"}
+                autoFocus={hasUnitToggle && !isGoalWeight}
               />
               <span className="text-base font-medium flex-shrink-0 ml-3" style={{ color: '#9CA3AF' }}>
                 {displayUnit}
@@ -902,7 +947,15 @@ export default function QuestionCard({ question, onAnswer, initialAnswer }: Ques
           )}
           
           <button
-            onClick={handleSubmitText}
+            onClick={() => {
+              // For goal weight, use suggested weight if no answer
+              if (isGoalWeight && suggestedWeight && !answer) {
+                const result = { value: suggestedWeight.idealWeight.toString(), unit };
+                onAnswer(result);
+              } else {
+                handleSubmitText();
+              }
+            }}
             disabled={!answer && !(isGoalWeight && suggestedWeight)}
             className="w-full max-w-md text-white font-bold py-4 px-8 rounded-2xl transition-all duration-300 hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed text-lg"
             style={{ backgroundColor: '#2F6657' }}
