@@ -15,6 +15,8 @@ export default function LoadingPage() {
         if (prev >= 100) {
           clearInterval(interval);
           setTimeout(() => {
+            // Clear all localStorage before going to email page
+            localStorage.clear();
             router.push('/email');
           }, 1000);
           return 100;
