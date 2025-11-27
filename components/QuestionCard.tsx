@@ -484,12 +484,32 @@ export default function QuestionCard({ question, onAnswer, initialAnswer }: Ques
           </p>
         )}
         {question.svgUrl && (
-          <div className="relative w-full max-w-md mx-auto py-8 mb-8">
-            <img 
-              src={question.svgUrl}
-              alt="Keto diet macronutrient breakdown"
-              className="w-full h-auto"
-            />
+          <div className="relative w-full max-w-lg mx-auto py-8 mb-8 flex items-center justify-center">
+            <div className="relative w-full" style={{ maxWidth: '548px' }}>
+              <img 
+                src={question.svgUrl}
+                alt="Keto diet macronutrient breakdown"
+                className="w-full h-auto"
+              />
+              {/* Overlay labels to ensure they're visible - labels above pointing lines */}
+              <div className="absolute inset-0 pointer-events-none">
+                {/* FATS 70-80% - left side, labels above the line */}
+                <div className="absolute left-0 text-left" style={{ top: '3rem', transform: 'translateY(-100%)' }}>
+                  <div className="text-sm font-bold mb-1" style={{ color: '#000000' }}>70-80%</div>
+                  <div className="text-xs font-semibold" style={{ color: '#000000' }}>FATS</div>
+                </div>
+                {/* CARBS 5-10% - top right, labels above the line */}
+                <div className="absolute right-0 text-right" style={{ top: '0rem', transform: 'translateY(-100%)' }}>
+                  <div className="text-sm font-bold mb-1" style={{ color: '#000000' }}>5-10%</div>
+                  <div className="text-xs font-semibold" style={{ color: '#000000' }}>CARBS</div>
+                </div>
+                {/* PROTEIN 25-30% - bottom right, labels above the line */}
+                <div className="absolute right-8 text-right" style={{ bottom: '12rem', transform: 'translateY(-100%)' }}>
+                  <div className="text-sm font-bold mb-1" style={{ color: '#000000' }}>25-30%</div>
+                  <div className="text-xs font-semibold" style={{ color: '#000000' }}>PROTEIN</div>
+                </div>
+              </div>
+            </div>
           </div>
         )}
         <div className="flex justify-center">
@@ -594,28 +614,17 @@ export default function QuestionCard({ question, onAnswer, initialAnswer }: Ques
             <button
               key={option.value}
               onClick={() => handleSingleSelect(option.value)}
-              className="group relative overflow-hidden transition-all duration-200 w-full"
+              className="group relative overflow-hidden transition-all duration-200 w-full hover:opacity-90"
               style={{
                 backgroundColor: '#ffefdb',
-                borderColor: answer === option.value ? '#93C5FD' : '#f2e1cc',
+                borderColor: answer === option.value ? '#f9bf93' : '#f2e1cc',
                 borderWidth: answer === option.value ? '2px' : '1px',
                 borderStyle: 'solid',
                 borderRadius: '8px',
                 minHeight: '72px'
               }}
             >
-              <div className="p-4 flex items-center gap-3">
-                <div 
-                  className="w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all flex-shrink-0"
-                  style={{ 
-                    borderColor: answer === option.value ? '#22C55E' : '#FFB84D',
-                    backgroundColor: 'transparent'
-                  }}
-                >
-                  {answer === option.value && (
-                    <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#22C55E' }}></div>
-                  )}
-                </div>
+              <div className="p-4 flex items-center">
                 <span className="text-base font-semibold flex-1 text-left" style={{ fontSize: '0.9375rem', fontWeight: 600, color: '#000000' }}>
                   {option.label}
                 </span>

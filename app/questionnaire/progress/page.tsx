@@ -60,8 +60,8 @@ export default function ProgressPage() {
   // Calculate target date (approximately 6 months from now)
   const targetDate = new Date();
   targetDate.setMonth(targetDate.getMonth() + 6);
-  const formattedDateShort = targetDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric' }); // "March 30"
-  const formattedDateFull = targetDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); // "Mar 30, 2026"
+  const formattedDateShort = targetDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric' }); // "July 9"
+  const formattedDateFull = targetDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); // "Jul 9, 2026"
 
   const handleContinue = () => {
     router.push('/questionnaire/15');
@@ -71,7 +71,7 @@ export default function ProgressPage() {
   const currentStep = 14;
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#FDF7F2' }}>
+    <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#FCFAF5' }}>
       {/* Logo only - no nav, no bg */}
       <div className="w-full px-4 sm:px-6 py-3 relative z-20">
         <div className="max-w-7xl mx-auto flex items-center">
@@ -111,53 +111,58 @@ export default function ProgressPage() {
             <p className="text-sm font-semibold mb-2" style={{ color: '#000000', fontSize: '0.875rem' }}>
               Based on your answers so far
             </p>
-            <h1 className="text-xl md:text-2xl font-extrabold mb-6 leading-tight" style={{ color: '#2F6657', fontSize: 'clamp(1.25rem, 2.5vw, 1.5rem)' }}>
-              {name || 'You'}, you'll reach <strong>{goalWeight}kg</strong> by {formattedDateShort}
+            <h1 className="text-xl md:text-2xl font-extrabold mb-6 leading-tight" style={{ color: '#000000', fontSize: 'clamp(1.25rem, 2.5vw, 1.5rem)' }}>
+              {name || 'You'}, you'll reach <strong>{goalWeight}kg</strong> by <strong>{formattedDateShort}</strong>
             </h1>
           </div>
 
           {/* Weight Loss Graph */}
           <div className="rounded-2xl p-4 mb-6 max-w-xl mx-auto" style={{ backgroundColor: '#FDF7F2' }} ref={graphRef}>
             <div className="relative h-64" style={{ padding: '1rem 1.5rem 2rem 1.5rem' }}>
-              {/* Grid lines - 4 equal segments (2 grid lines at 33.33% and 66.66%) */}
+              {/* All vertical lines - extending from bottom to top, all same alignment */}
               <div className="absolute inset-0" style={{ padding: '1rem 1.5rem 2rem 1.5rem' }}>
                 <div className="w-full h-full relative">
-                  <div className="absolute w-px h-full" style={{ backgroundColor: '#2F6657', left: '33.33%', opacity: 0.3 }}></div>
-                  <div className="absolute w-px h-full" style={{ backgroundColor: '#2F6657', left: '66.66%', opacity: 0.3 }}></div>
+                  {/* Start vertical line (Today) - full height from bottom to top */}
+                  <div className="absolute w-px h-full bottom-0" style={{ backgroundColor: '#2F6657', left: '1.5rem' }}></div>
+                  {/* Grid line 1 - full height, evenly spaced */}
+                  <div className="absolute w-px h-full bottom-0" style={{ backgroundColor: '#2F6657', left: '33.33%' }}></div>
+                  {/* Grid line 2 - full height, evenly spaced */}
+                  <div className="absolute w-px h-full bottom-0" style={{ backgroundColor: '#2F6657', left: '66.66%' }}></div>
+                  {/* End vertical line (Goal) - full height from bottom to top */}
+                  <div className="absolute w-px h-full bottom-0" style={{ backgroundColor: '#2F6657', right: '1.5rem' }}></div>
                 </div>
               </div>
               
               {/* Starting point - Today (node at top) */}
               <div className="absolute" style={{ left: '1.5rem', top: '1rem' }}>
-                <div className="flex flex-col items-center">
-                  {/* Light green rounded rectangular label */}
-                  <div className="px-3 py-1.5 rounded mb-2" style={{ backgroundColor: '#A0E0D0' }}>
-                    <p className="text-xs font-bold whitespace-nowrap" style={{ fontSize: '0.75rem', color: '#2F6657' }}>{currentWeight}kg</p>
+                <div className="flex flex-col items-center relative">
+                  {/* Dark green rounded rectangular label with white text */}
+                  <div className="px-3 py-1.5 rounded-lg mb-2 z-20" style={{ backgroundColor: '#2F6657', borderRadius: '8px' }}>
+                    <p className="text-xs font-bold whitespace-nowrap text-white" style={{ fontSize: '0.75rem' }}>{currentWeight}kg</p>
                   </div>
-                  {/* Dark green circular node with white dot in center - THIS IS THE START POINT */}
-                  <div ref={startNodeRef} className="relative w-4 h-4 rounded-full mb-2 z-10" style={{ backgroundColor: '#2F6657' }}>
+                  {/* Dark green circular node with white dot in center - positioned on the line */}
+                  <div ref={startNodeRef} className="relative w-4 h-4 rounded-full mb-2 z-20" style={{ backgroundColor: '#2F6657' }}>
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-white"></div>
                   </div>
-                  {/* Vertical line extending downwards */}
-                  <div className="w-0.5 h-32" style={{ backgroundColor: '#2F6657' }}></div>
-                  <p className="text-xs font-semibold text-gray-600 mt-2 whitespace-nowrap" style={{ fontSize: '0.75rem' }}>Today</p>
+                  {/* Date label at bottom - aligned with line */}
+                  <p className="text-xs font-semibold text-gray-700 absolute bottom-0 whitespace-nowrap" style={{ fontSize: '0.75rem', color: '#2F6657' }}>Today</p>
                 </div>
               </div>
               
               {/* Goal point (node at bottom) */}
               <div className="absolute" style={{ right: '1.5rem', bottom: '2rem' }}>
-                <div className="flex flex-col items-center">
-                  {/* Vertical line extending upwards */}
-                  <div className="w-0.5 h-32 mb-2" style={{ backgroundColor: '#2F6657' }}></div>
-                  {/* Dark green circular node with white dot in center - THIS IS THE END POINT */}
-                  <div ref={endNodeRef} className="relative w-4 h-4 rounded-full mb-2 z-10" style={{ backgroundColor: '#2F6657' }}>
+                <div className="flex flex-col items-center relative">
+                  {/* Dark green rounded rectangular label with white text - two lines */}
+                  <div className="px-3 py-1.5 rounded-lg mb-2 text-center z-20" style={{ backgroundColor: '#2F6657', borderRadius: '8px' }}>
+                    <p className="text-xs font-bold text-white leading-tight" style={{ fontSize: '0.75rem' }}>Goal</p>
+                    <p className="text-xs font-bold text-white leading-tight" style={{ fontSize: '0.75rem' }}>{goalWeight}kg</p>
+                  </div>
+                  {/* Dark green circular node with white dot in center - positioned on the line */}
+                  <div ref={endNodeRef} className="relative w-4 h-4 rounded-full mb-2 z-20" style={{ backgroundColor: '#2F6657' }}>
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-white"></div>
                   </div>
-                  {/* Dark green rounded rectangular label with white text */}
-                  <div className="px-3 py-1.5 rounded mb-2 text-center" style={{ backgroundColor: '#2F6657' }}>
-                    <p className="text-xs font-bold leading-tight text-white" style={{ fontSize: '0.75rem' }}>Goal {goalWeight}kg</p>
-                  </div>
-                  <p className="text-xs font-semibold text-gray-600 mt-2 whitespace-nowrap" style={{ fontSize: '0.75rem' }}>{formattedDateFull}</p>
+                  {/* Date label at bottom - aligned with line */}
+                  <p className="text-xs font-semibold text-gray-700 mt-2 whitespace-nowrap" style={{ fontSize: '0.75rem', color: '#2F6657' }}>{formattedDateFull}</p>
                 </div>
               </div>
               
@@ -167,7 +172,7 @@ export default function ProgressPage() {
                   d={curvePath}
                   fill="none"
                   stroke="#2F6657"
-                  strokeWidth="4"
+                  strokeWidth="5"
                   strokeLinecap="round"
                 />
               </svg>
@@ -176,7 +181,7 @@ export default function ProgressPage() {
 
           {/* Testimonial Section */}
           <div className="mb-6 max-w-lg mx-auto">
-            <h2 className="text-lg font-extrabold text-center mb-4" style={{ color: '#2F6657', fontSize: '1rem' }}>
+            <h2 className="text-lg font-extrabold text-center mb-4" style={{ color: '#000000', fontSize: '1rem' }}>
               What people say
             </h2>
             <div className="bg-white rounded-xl p-4 shadow-sm" style={{ backgroundColor: '#ffefdb' }}>

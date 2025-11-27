@@ -62,7 +62,8 @@ export default function EmailPage() {
           </div>
 
           <h1 className="text-xl md:text-2xl font-extrabold text-center mb-8 max-w-lg mx-auto leading-tight" style={{ color: '#2F6657', fontSize: 'clamp(1.25rem, 2.5vw, 1.5rem)' }}>
-            Receive your weight loss program in your email to reach your {targetWeight}kg goal
+            Receive your weight loss program in your<br />
+            email to reach your {targetWeight}kg goal
           </h1>
           
           {/* Email input */}
@@ -95,7 +96,7 @@ export default function EmailPage() {
             disabled={!email || !email.includes('@')}
             className="w-full font-bold py-3 px-6 rounded-xl transition-all duration-200 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed mb-6"
             style={{ 
-              backgroundColor: '#6B7280', 
+              backgroundColor: '#2F6657', 
               color: '#FFFFFF',
               fontSize: '0.875rem',
               fontWeight: 700
@@ -104,7 +105,7 @@ export default function EmailPage() {
             Continue
           </button>
 
-          <p className="text-xs text-gray-600 text-center max-w-lg mx-auto leading-relaxed" style={{ fontSize: '0.75rem', lineHeight: '1.5' }}>
+          <p className="text-xs text-gray-700 text-center max-w-lg mx-auto leading-relaxed" style={{ fontSize: '0.75rem', lineHeight: '1.5', color: '#1F2937' }}>
             By clicking "Continue" below you acknowledge that you have read, understood and accepted the{' '}
             <a href="#" className="underline font-medium" style={{ color: '#2F6657' }}>Terms of Use</a> and{' '}
             <a href="#" className="underline font-medium" style={{ color: '#2F6657' }}>Privacy Policy</a> and you agree to receive future emails from us about our weight loss program.

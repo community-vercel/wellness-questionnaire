@@ -183,7 +183,7 @@ export default function QuestionnairePage() {
                     <path d="M19 12H5M12 19l-7-7 7-7"/>
                   </svg>
                 </button>
-                <div className="text-sm font-semibold" style={{ color: '#2F6657', fontSize: '0.875rem', fontWeight: 600 }}>
+                <div className="text-sm font-semibold" style={{ color: '#2F6657', fontSize: '0.875rem', fontWeight: 800 }}>
                   {currentStep}/{totalSteps}
                 </div>
               </div>

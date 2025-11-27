@@ -20,6 +20,8 @@ export default function PricingPage() {
   }, []);
 
   const handleGetPlan = () => {
+    // Clear all localStorage after completing the questionnaire
+    localStorage.clear();
     // In real app, would process payment
     // After payment, redirect to dashboard
     router.push('/dashboard');
